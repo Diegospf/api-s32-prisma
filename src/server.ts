@@ -8,7 +8,19 @@ const port = process.env.PORT || 3001;
 
 const app = express();
 app.use(cors());
-app.use(cors({ origin: 'http://localhost:3000' }));
+const corsOptions = {
+  origin: (origin: any, callback: any) => {
+    const allowedOrigins = ['https://s32inmovies.vercel.app', 'http://localhost:3000'];
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
