@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  username String   @id
+  password String
+  MyList   MyList[]
+  Week     Week[]
+  Rate     Rate[]
+
+  @@map("user")
+}
+
+model S32List {
+  id       Int @id @default(autoincrement())
+  movie_id Int
+
+  @@map("s32list")
+}
+
+model MyList {
+  id       Int    @id @default(autoincrement())
+  user_id  String
+  movie_id Int
+  user     User   @relation(fields: [user_id], references: [username])
+
+  @@map("mylist")
+}
+
+model Week {
+  id      Int    @id @default(autoincrement())
+  name    String
+  movies  String
+  year    Int
+  user_id String
+  user    User   @relation(fields: [user_id], references: [username])
+
+  @@map("week")
+}
+
+model Rate {
+  id       Int    @id @default(autoincrement())
+  user_id  String
+  movie_id Int
+  rate     Int
+  user     User   @relation(fields: [user_id], references: [username])
+
+  @@map("rate")
+}
