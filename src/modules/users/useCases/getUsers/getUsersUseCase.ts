@@ -4,13 +4,13 @@ import { prisma } from "../../../../prisma/client";
 export class UserUseCase {
   async getAllUsers(): Promise<{ id: string; }[]> {
     try {
-      const users = await prisma.user.findMany({
+      const users: User[] = await prisma.user.findMany({
         select: {
           username: true,
+          password: true,
         },
       });
 
-      // Mapear o resultado para o formato desejado
       const formattedUsers = users.map((user) => ({
         id: user.username,
       }));

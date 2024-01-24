@@ -1,5 +1,3 @@
-// /backend/src/controllers/myListController.ts
-
 import { Request, Response } from "express";
 import { prisma } from "../../../prisma/client";
 

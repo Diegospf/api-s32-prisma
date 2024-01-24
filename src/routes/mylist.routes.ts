@@ -1,7 +1,7 @@
 // /backend/src/routes/myListRoutes.ts
 
 import { Router } from "express";
-import { MyListController } from "../modules/mylist/useCases/myListController";
+import { MyListController } from "../modules/mylist/useCases/MyListController";
 
 const myListController = new MyListController();
 const myListRoutes = Router();
